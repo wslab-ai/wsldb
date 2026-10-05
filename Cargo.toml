@@ -1,0 +1,56 @@
+[package]
+name = "wsldb"
+version = "1.0.0"
+publish = false
+edition = "2024"
+rust-version = "1.89"
+description = "A transactional copy-on-write embedded key-value database written in Rust"
+repository = "https://github.com/wslab-ai/wsldb"
+readme = "README.md"
+license = "MIT"
+keywords = ["database", "embedded", "key-value", "mvcc", "storage"]
+categories = ["database-implementations"]
+
+[features]
+crash-injection = []
+fault-injection = []
+
+[lib]
+path = "src/lib.rs"
+
+[[bench]]
+name = "wsldb"
+path = "benchmarks/wsldb.rs"
+harness = false
+
+[[bench]]
+name = "group_commit"
+path = "benchmarks/group_commit.rs"
+harness = false
+
+[[bench]]
+name = "verification"
+path = "benchmarks/verification.rs"
+harness = false
+
+[[bench]]
+name = "wal_sync"
+path = "benchmarks/wal_sync.rs"
+harness = false
+
+[[bench]]
+name = "compaction"
+path = "benchmarks/compaction.rs"
+harness = false
+
+[profile.release]
+codegen-units = 1
+lto = "thin"
+
+[lints.rust]
+unsafe_code = "forbid"
+
+[lints.clippy]
+dbg_macro = "deny"
+todo = "deny"
+unimplemented = "deny"
